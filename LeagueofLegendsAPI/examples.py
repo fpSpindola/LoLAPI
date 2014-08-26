@@ -1,33 +1,40 @@
 __author__ = 'Filipe'
+# noinspection PyStatementEffect
 
 import requests
 
-api_key = 'f905f608-0cca-4262-8c2a-ffb26d2dd246'
+class LolApi:
+    def __init__(self):
+        self.api_key = api_key = 'f905f608-0cca-4262-8c2a-ffb26d2dd246'
+        self.default_url = 'https://br.api.pvp.net/api/lol'
+        self.region = 'br'
+        self.api_reference_version = None
 
 ###################
 ###champion-v1.2###
 ###################
 
-#Get Information from all LoL Champions
-ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.2/champion?api_key=%s' %api_key)
+    def get_all_champ_information(self):
+        #Get Information from all LoL Champions
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.2/champion?api_key=%s' %self.api_key)
 
-#Get Information from all LoL Champions by Id
-ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v1.2/champion/{id}/api_key=%s' %api_key)
-
+    def get_all_champ_information_by_id(self):
+        #Get Information from all LoL Champions by Id
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v1.2/champion/{id}/api_key=%s' %self.api_key)
 
 ###################
 #####game-v1.3#####
 ###################
 
 #Get a Game Information by Summoner Id
-ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent/api_key=%s' %api_key)
+ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent/api_key=%s' %self.api_key)
 
 ###################
 ####league-v2.4####
 ###################
 
 #Get leagues mapped by summoner ID for a given list of summoner IDs. (REST)
-GET /api/lol/{region}/v2.4/league/by-summoner/{summonerIds}
+ret = request.get(r'GET /api/lol/{region}/v2.4/league/by-summoner/{summonerIds}
 
 #Get league entries mapped by summoner ID for a given list of summoner IDs. (REST)
 GET /api/lol/{region}/v2.4/league/by-summoner/{summonerIds}/entry

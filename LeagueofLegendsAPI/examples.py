@@ -177,5 +177,3 @@ class LolApi:
     #Get teams mapped by team ID for a given list of team IDs. (REST)
     def get_teams_by_team_id(self):
         ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v.2.3/team/{teamsIds}/api_key=%s' %self.api_key)
-
-

@@ -14,69 +14,86 @@ class LolApi:
 ###champion-v1.2###
 ###################
 
+    #Get Information from all LoL Champions
     def get_all_champ_information(self):
-        #Get Information from all LoL Champions
         ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.2/champion?api_key=%s' %self.api_key)
 
+    #Get Information from all LoL Champions by Id
     def get_all_champ_information_by_id(self):
-        #Get Information from all LoL Champions by Id
         ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v1.2/champion/{id}/api_key=%s' %self.api_key)
 
 ###################
 #####game-v1.3#####
 ###################
 
-#Get a Game Information by Summoner Id
-ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent/api_key=%s' %self.api_key)
+    #Get a Game Information by Summoner Id
+    def get_game_info_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v1.3/game/by-summoner/{summonerId}/recent/api_key=%s' %self.api_key)
 
 ###################
 ####league-v2.4####
 ###################
 
-#Get leagues mapped by summoner ID for a given list of summoner IDs. (REST)
-ret = request.get(r'GET /api/lol/{region}/v2.4/league/by-summoner/{summonerIds}
+    #Get leagues mapped by summoner ID for a given list of summoner IDs. (REST)
+    def get_leagues_by_summoner_id_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v2.4/league/by-summoner/{summonerIds}/api_key=%s' %self.api_key)
 
-#Get league entries mapped by summoner ID for a given list of summoner IDs. (REST)
-GET /api/lol/{region}/v2.4/league/by-summoner/{summonerIds}/entry
+    #Get league entries mapped by summoner ID for a given list of summoner IDs. (REST)
+    def get_league_entries_by_summoner_id_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v2.4/league/by-summoner/{summonerIds}/entry/api_key=%s' %self.api_key)
 
-#Get leagues mapped by team ID for a given list of team IDs. (REST)
-GET /api/lol/{region}/v2.4/league/by-team/{teamIds}
+    #Get leaguess mapped by team ID for a given list of team IDs. (REST)
+    def  get_leagues_by_team_id_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v2.4/league/by-team/{teamIds}/api_key=%s' %self.api_key)
 
-#Get league entries mapped by team ID for a given list of team IDs. (REST)
-GET /api/lol/{region}/v2.4/league/by-team/{teamIds}/entry
+    #Get league entries mapped by team ID for a given list of team IDs. (REST)
+    def get_league_entries_by_team_id_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v2.4/league/by-team/{teamIds}/entry/api_key=%s' %self.api_key)
 
-#Get challenger tier leagues. (REST)
-GET /api/lol/{region}/v2.4/league/challenger
+    #Get challenger tier leagues. (REST)
+    def get_challenger_tier_leagues(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/{region}/v2.4/league/challenger/api_key=%s' %self.api_key)
 
 ############################
 ####lol-static-data-v1.2####
 ############################
 
-#Retrieves champion list. (REST)
-GET /api/lol/static-data/{region}/v1.2/champion
+    #Retrieves champion list. Return IDs(REST)
+    def get_all_champions(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/champion/api_key=%s' %self.api_key)
 
-#Retrieves a champion by its id. (REST)
-GET /api/lol/static-data/{region}/v1.2/champion/{id}
 
-#Retrieves item list. (REST)
-GET /api/lol/static-data/{region}/v1.2/item
+    #Retrieves a champion by its id. (REST)
+    def get_champion_by_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/champion/{id}/api_key=%s' %self.api_key)
 
-#Retrieves item by its unique id. (REST)
-GET /api/lol/static-data/{region}/v1.2/item/{id}
+    #Retrieves item list. (REST)
+    def get_item_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/item/api_key=%s' %self.api_key)
 
-#Retrieves mastery list. (REST)
-GET /api/lol/static-data/{region}/v1.2/mastery
+    #Retrieves item by its unique id. (REST)
+    def get_item_by_unique_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/item/{id}/api_key=%s' %self.api_key)
 
-#Retrieves mastery item by its unique id. (REST)
-GET /api/lol/static-data/{region}/v1.2/mastery/{id}
+    #Retrieves mastery list. (REST)
+    def get_mastery_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/mastery/api_key=%s' %self.api_key)
 
-#Retrieve realm data. (REST)
-GET /api/lol/static-data/{region}/v1.2/realm
+    #Retrieves mastery item by its unique id. (REST)
+    def get_mastery_item_by_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/mastery/{id}/api_key=%s' %self.api_key)
 
-#Retrieves rune list. (REST)
-GET /api/lol/static-data/{region}/v1.2/rune
+    #Retrieve realm data. (REST)
+    def get_domain_information(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/realm/api_key=%s' %self.api_key)
 
-#Retrieves rune by its unique id. (REST)
+    #Retrieves rune list. (REST)
+    def get_all_runes_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/rune')
+
+    #Retrieves rune by its unique id. (REST)
+    def get_rune_by_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/rune/{id}/api_key=%s' %self.api_key)
 GET /api/lol/static-data/{region}/v1.2/rune/{id}
 
 #Retrieves summoner spell list. (REST)

@@ -94,69 +94,88 @@ class LolApi:
     #Retrieves rune by its unique id. (REST)
     def get_rune_by_id(self):
         ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/rune/{id}/api_key=%s' %self.api_key)
-GET /api/lol/static-data/{region}/v1.2/rune/{id}
 
-#Retrieves summoner spell list. (REST)
-GET /api/lol/static-data/{region}/v1.2/summoner-spell
+    #Retrieves summoner spell list. (REST)
+    def get_summoner_spell_list(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/summoner-spell/api_key=%s' %self.api_key)
 
-#Retrieves summoner spell by its unique id. (REST)
-GET /api/lol/static-data/{region}/v1.2/summoner-spell/{id}
 
-#Retrieve version data. (REST)
-GET /api/lol/static-data/{region}/v1.2/versions
+    #Retrieves summoner spell by its unique id. (REST)
+    def get_summoner_spell_by_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/{region}/v1.2/summoner-spell/{id}/api_key=%s' %self.api_key)
+
+    #Retrieve version data. (REST)
+    def get_versions_data(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/static-data/br/v1.2/versions?api_key=%s' %self.api_key)
 
 #################
-####marchv2.2####
+####match-v2.2####
 #################
 
-#Retrieve match by match ID. (REST)
-GET /api/lol/{region}/v2.2/match/{matchId}
+#Retrieve match by match ID(Required). (REST)
+#Able to use includeTimeline parameter
+#Match queue type (legal values: CUSTOM, NORMAL_5x5_BLIND, RANKED_SOLO_5x5, RANKED_PREMADE_5x5, BOT_5x5, NORMAL_3x3, RANKED_PREMADE_3x3, NORMAL_5x5_DRAFT,
+# ODIN_5x5_BLIND, ODIN_5x5_DRAFT, BOT_ODIN_5x5, BOT_5x5_INTRO, BOT_5x5_BEGINNER, BOT_5x5_INTERMEDIATE, RANKED_TEAM_3x3, RANKED_TEAM_5x5, BOT_TT_3x3,
+# GROUP_FINDER_5x5, ARAM_5x5, ONEFORALL_5x5, FIRSTBLOOD_1x1, FIRSTBLOOD_2x2, SR_6x6, URF_5x5, BOT_URF_5x5, NIGHTMARE_BOT_5x5_RANK1, NIGHTMARE_BOT_5x5_RANK2,
+# NIGHTMARE_BOT_5x5_RANK5)
+    def get_match_data(self):
+        ret = requests.get('https://br.api.pvp.net/api/lol/br/v2.2/match/RANKED_SOLO_5x5?includeTimeline=1&api_key=%s' %self.api_key)
 
 #########################
 ####matchhistory-v2.2####
 #########################
 
-#Retrieve match history by summoner ID. (REST)
-GET /api/lol/{region}/v2.2/matchhistory/{summonerId}
+    #Retrieve match history by summoner ID. (REST)
+    def get_match_info_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v2.2/matchhistory/{summonerId}/api_key=%s' %self.api_key)
 
 ##################
 ####stats-v1.3####
 ##################
 
-#Get ranked stats by summoner ID. (REST)
-GET /api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/ranked
+    #Get ranked stats by summoner ID. (REST)
+    def get_ranked_match_status_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.3/stats/by-summoner/{summonerId}/ranked/api_key=%s' %self.api_key)
 
-#Get player stats summaries by summoner ID. (REST)
-GET /api/lol/{region}/v1.3/stats/by-summoner/{summonerId}/summary
+    #Get player stats summaries by summoner ID. (REST)
+    def get_player_stats_summaries_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.3/stats/by-summoner/{summonerId}/summary/api_key=%s' %self.api_key)
 
 ####################
 ###summoner-v1.4####
 ####################
 
-#Get summoner objects mapped by standardized summoner name for a given list of summoner names. (REST)
-GET /api/lol/{region}/v1.4/summoner/by-name/{summonerNames}
+    #Get summoner objects mapped by standardized summoner name for a given list of summoner names. | "SummonerId, Name, ProfileIconId, revisionDate, summonerLevel"
+    def get_summoner_info_by_names(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.4/summoner/by-name/{summonerNames}/api_key=%s' %self.api_key)
 
-#Get objects mapped by summoner ID for a given list of summoner IDs. (REST)
-GET /api/lol/{region}/v1.4/summoner/{summonerIds}
+    #Get summoner objects mapped by standardized summoner name for a given list of summoner names. | "SummonerId, Name, ProfileIconId, revisionDate, summonerLevel"
+    def get_summoner_info_by_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.4/summoner/{summonerIds}/api_key=%s' %self.api_key)
 
-#Get mastery pages mapped by summoner ID for a given list of summoner IDs (REST)
-GET /api/lol/{region}/v1.4/summoner/{summonerIds}/masteries
+    #Get mastery pages mapped by summoner ID for a given list of summoner IDs (REST)
+    def get_mastery_pages_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.4/summoner/{summonerIds}/masteries/api_key=%s' %self.api_key)
 
-#Get summoner names mapped by summoner ID for a given list of summoner IDs. (REST)
-GET /api/lol/{region}/v1.4/summoner/{summonerIds}/name
+    #Get summoner names mapped by summoner ID for a given list of summoner IDs. (REST)
+    def get_summoner_names_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.4/summoner/{summonerIds}/name/api_key=%s' %self.api_key)
 
-#Get rune pages mapped by summoner ID for a given list of summoner IDs. (REST)
-GET /api/lol/{region}/v1.4/summoner/{summonerIds}/runes
+    #Get rune pages mapped by summoner ID for a given list of summoner IDs. (REST)
+    def gett_rune_pages_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v1.4/summoner/{summonerIds}/runes/api_key=%s' %self.api_key)
 
 
 #################
 ####team-v2.3####
 #################
 
-#Get teams mapped by summoner ID for a given list of summoner IDs. (REST)
-GET /api/lol/{region}/v2.3/team/by-summoner/{summonerIds}
+    #Get teams mapped by summoner ID for a given list of summoner IDs. (REST)
+    def get_teams_by_summoner_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v2.3/team/by-summoner/{summonerIds}/api_key=%s' %self.api_key)
 
-#Get teams mapped by team ID for a given list of team IDs. (REST)
-GET /api/lol/{region}/v2.3/team/{teamIds}
+    #Get teams mapped by team ID for a given list of team IDs. (REST)
+    def get_teams_by_team_id(self):
+        ret = requests.get(r'https://br.api.pvp.net/api/lol/br/v.2.3/team/{teamsIds}/api_key=%s' %self.api_key)
 
 

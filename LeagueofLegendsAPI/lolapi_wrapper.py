@@ -21,11 +21,11 @@ import unicodedata
 import re
 
 class LeagueOfLegends:
-
-    API_BASE_URL = 'https://prod.api.pvp.net/api/lol'
-    api_version = '1.2'
-    api_region = 'na'
-    api_url = API_BASE_URL + '/' + api_region + '/' + 'v' + api_version + '/'
+    #api_key = 'f905f608-0cca-4262-8c2a-ffb26d2dd246'
+    API_BASE_URL = 'https://br.api.pvp.net/api/lol'
+    api_version = {'champion':'1.2', 'game':'1.3', 'league':'2.4', 'lol-static-data': '1.2', 'match':'2.2', 'matchhistory':'2.2','stats':'1.3', 'summoner':'1.4', 'team':'2.3'}
+    api_region = 'br'
+    api_url = API_BASE_URL + '/' + api_region + '/' + 'v' + api_version['champion'] + '/'
 
     def __init__(self, api_key, cache={}):
         self.api_key = api_key
@@ -44,15 +44,15 @@ class LeagueOfLegends:
                     return self.__cache[url]['response']
 
                 if 'etag' in self.__cache[url]:
-                    print 'Adding ETag to request header: '\
-                        + self.__cache[url]['etag']
+                    print('Adding ETag to request header: '\
+                        + self.__cache[url]['etag'])
                     req.add_header('If-None-Match',
                                    self.__cache[url]['etag'])
                 if 'last_modified' in self.__cache[url]:
-                    print('Adding Last-Modified to request header: '\
+                    print'Adding Last-Modified to request header: '\
                         + self.__cache[url]['last_modified']
                     req.add_header('If-Modified-Since',
-                                   self.__cache[url]['last_modified']))
+                                   self.__cache[url]['last_modified'])
 
             url_handle = opener.open(req)
 
@@ -148,7 +148,7 @@ class LeagueOfLegends:
                 summoner_id = self.summoner_id
             else:
                 return
-        self.set_api_version('2.2')
+        self.set_api_version('2.5')
         url = self.api_url + 'league/by-summoner/%s?api_key=%s' % (summoner_id, self.api_key)
         response = json.loads(self.__webrequest(url))
         # Return data with more useful keys based on league type
@@ -176,7 +176,7 @@ class LeagueOfLegends:
                 summoner_id = self.summoner_id
             else:
                 return
-        self.set_api_version('1.2')
+        self.set_api_version('1.3')
         url = self.api_url + 'stats/by-summoner/%s/ranked?api_key=%s' % (summoner_id, self.api_key)
         response = json.loads(self.__webrequest(url))
         if response["summonerId"] != summoner_id:
@@ -191,7 +191,7 @@ class LeagueOfLegends:
                 summoner_id = self.summoner_id
             else:
                 return
-        self.set_api_version('1.2')
+        self.set_api_version('1.4')
         url = self.api_url + 'summoner/%s?api_key=%s' % (summoner_id, self.api_key)
         response = json.loads(self.__webrequest(url))
         return response
@@ -199,7 +199,7 @@ class LeagueOfLegends:
     def get_summoner_by_name(self, summoner_name):
         if summoner_name == '':
             return
-        self.set_api_version('1.2')
+        self.set_api_version('1.4')
         url = self.api_url + 'summoner/by-name/%s?api_key=%s' % (summoner_name, self.api_key)
         response = json.loads(self.__webrequest(url))
         return response
@@ -261,13 +261,14 @@ class LeagueOfLegends:
     # from summoner name. All future API calls will use this
     # ID if there is none passed in.
     def set_summoner(self, summoner_name):
-        summoner_id = self.get_summoner_by_name(summoner_name)["id"]
+        summoner_id = self.get_summoner_by_name(summoner_name)["letrotski"]["id"]
      #   print summoner_id
         self.summoner_id = summoner_id
+        return summoner_id
 
     def set_summoner_id(self, summoner_id):
         # check numeric type
-        self.summoner_id = summoner.id
+        self.summoner_id = summoner_id
 
     # Convenience functions to save typing.
     def get_games(self, summoner_id):
